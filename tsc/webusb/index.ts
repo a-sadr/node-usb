@@ -348,6 +348,9 @@ export class WebUSB implements USB {
             // Serial
             if (filter.serialNumber && filter.serialNumber !== device.serialNumber) return false;
 
+            // FPGA validation
+            if(filter.IsFPGA && filter.IsFPGA !== device.IsFPGA) return false
+
             return true;
         });
     }
@@ -372,6 +375,7 @@ export class WebUSB implements USB {
             && authorised.subclassCode === device.deviceSubclass
             && authorised.protocolCode === device.deviceProtocol
             && authorised.serialNumber === device.serialNumber
+            && device.serialNumber.startsWith('F0')
         );
     }
 }
